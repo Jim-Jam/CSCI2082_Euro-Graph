@@ -51,6 +51,11 @@ public class Destination implements Cloneable{
         return location.getCityName();
     }
     
+    
+    public int getCityVertex(){
+        return location.getCityVertex();
+    }
+    
     /**
      * Gets the amount of time between a Destination and its corresponding
      * Station.
