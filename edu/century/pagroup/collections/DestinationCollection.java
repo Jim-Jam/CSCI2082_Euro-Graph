@@ -93,7 +93,7 @@ public class DestinationCollection implements Cloneable{
         DestinationNode cursor;
         
         for(cursor = head; cursor != null; cursor = cursor.getLink()){
-            int element = cursor.getData().getCity().getVertex();
+            int element = cursor.getData().getVertex();
             if(vertex == element)
                 return cursor;
         }
@@ -135,7 +135,7 @@ public class DestinationCollection implements Cloneable{
         DestinationNode cursor;
         
         for(cursor = head; cursor != null; cursor = cursor.getLink()){
-            int element = cursor.getData().getCity().getVertex();
+            int element = cursor.getData().getVertex();
             if(cityVertex == element)
                 return true;
         }
