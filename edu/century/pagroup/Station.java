@@ -12,7 +12,7 @@ import edu.century.pagroup.exceptions.StationNotFoundException;
  *
  * @author Matt
  */
-public class Station implements Cloneable{
+public class Station extends City implements Cloneable{
     
     /**
      * Invariant of the class Station:
@@ -21,17 +21,7 @@ public class Station implements Cloneable{
      * destinations is a LinkedList of Destination objects. destinations
      * refers to to the cities to which one can travel from the Station object
      */
-    private City place;
     private DestinationCollection destinations;
-    
-    /**
-     * Null constructor for a Station object
-     * @postcondition a Station object has been created
-     */
-    public Station(){
-        place = null;
-        destinations = null;
-    }
     
     /**
      * A constructor for a Station object that takes a City object as its
@@ -41,16 +31,8 @@ public class Station implements Cloneable{
      * to the argument in the city parameter.
      */
     public Station(City city){
-        place = new City(city);
+        super(city);
         destinations = new DestinationCollection();
-    }
-    
-    /**
-     * Gets the place variable of a Station
-     * @return the City variable place of a Station object
-     */
-    public City getCity(){
-        return place;
     }
     
     /**
@@ -58,7 +40,7 @@ public class Station implements Cloneable{
      * @return the String cityName of a Station object
      */
     public String getCityName(){
-        return place.getCityName();
+        return super.getCityName();
     }
     
     /**
@@ -66,7 +48,7 @@ public class Station implements Cloneable{
      * @return an int, the vertex id of the City in the Station object.
      */
     public int getCityVertex(){
-        return place.getVertex();
+        return super.getVertex();
     }
     
     /**
@@ -175,7 +157,9 @@ public class Station implements Cloneable{
         else{
             Station otherStation = (Station)other;
             
-            return (this.getCity().equals(otherStation.getCity()) &&
+            return (super.getCityName().equals(otherStation.getCityName()) &&
+                    super.getCountryName().equals(otherStation.getCountryName()) &&
+                    (super.getVertex() == otherStation.getCityVertex()) &&
                     this.getDestinations().equals(otherStation.getDestinations()));
         }
     }
@@ -189,7 +173,7 @@ public class Station implements Cloneable{
         
         String ret;
         
-        ret = place.toString();
+        ret = super.toString();
         ret += "\nDestinations:\n\n" + destinations.toString();
         
         return ret;
@@ -203,15 +187,8 @@ public class Station implements Cloneable{
         
         Station answer;
         
-        try{
-            answer = (Station)super.clone();
-        }
-        catch(CloneNotSupportedException e){
-            return null;
-        }
-        
-        answer.place = this.getCity().clone();
-        answer.destinations = this.getDestinations().clone();
+        answer = (Station)super.clone();
+        answer.destinations = this.getDestinations();
         
         return answer;
     }
