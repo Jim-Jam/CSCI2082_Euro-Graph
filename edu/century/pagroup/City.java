@@ -24,6 +24,11 @@ public class City implements Cloneable{
     private String cityName;
     private String countryName;
     
+    public City(){
+        cityName = null;
+        countryName = null;
+    }
+    
     /**
      * Constructor for a City object.
      * @param city the name of the city
