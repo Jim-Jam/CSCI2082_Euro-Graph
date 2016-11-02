@@ -85,7 +85,7 @@ public class StationCollection {
     public Station search(int targetVertex) throws StationNotFoundException{
         
         for(Station element : europe){
-            if(element.getCity().getVertex() == targetVertex)
+            if(element.getVertex() == targetVertex)
                 return element;
         }
         

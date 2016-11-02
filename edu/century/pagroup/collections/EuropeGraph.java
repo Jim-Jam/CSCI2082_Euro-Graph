@@ -568,17 +568,17 @@ public class EuropeGraph {
      * @return an array of the argument's Destinations
      */
     public Destination[] getNeighbors(String stationName){
-        
-        Station tmp = new Station();
     
         try{
-           tmp = europe.search(stationName);
+            Station tmp;
+            tmp = europe.search(stationName);
+            return tmp.getNeighbors();
         }
         catch(StationNotFoundException e){
             System.out.println(e.getMessage());
         }
         
-        return tmp.getNeighbors();
+        return null;
     }
     
     /**
@@ -591,16 +591,16 @@ public class EuropeGraph {
      */
     public Destination[] getNeighbors(int cityVertex){
         
-        Station tmp = new Station();
-        
         try{
+            Station tmp;
             tmp = europe.search(cityVertex);
+            return tmp.getNeighbors();
         }
         catch(StationNotFoundException e){
             System.out.println(e.getMessage());
         }
         
-        return tmp.getNeighbors();
+        return null;
     }
     
     /**

@@ -9,7 +9,7 @@ package edu.century.pagroup;
  *
  * @author Matt
  */
-public class Destination implements Cloneable{
+public class Destination extends City implements Cloneable{
     
     /**
      * Invariant of the class Destination:
@@ -18,7 +18,6 @@ public class Destination implements Cloneable{
      * a Destination object and its corresponding Station (Each Station
      * has at least one Destination).
      */
-    private City location;
     private int timeWeight;
     
     /**
@@ -31,16 +30,8 @@ public class Destination implements Cloneable{
      */
     public Destination(City goToLocation, int timeTo){
         
-        location = goToLocation;
+        super(goToLocation);
         timeWeight = timeTo;
-    }
-    
-    /**
-     * gets the City instance variable location
-     * @return a reference to the City variable location
-     */
-    public City getCity(){
-        return location;
     }
     
     /**
@@ -48,12 +39,12 @@ public class Destination implements Cloneable{
      * @return a String, the name of the city of the calling object
      */
     public String getCityName(){
-        return location.getCityName();
+        return super.getCityName();
     }
     
     
     public int getCityVertex(){
-        return location.getCityVertex();
+        return super.getCityVertex();
     }
     
     /**
@@ -85,12 +76,13 @@ public class Destination implements Cloneable{
         
         String ret;
         
-        ret = location.toString() + "\nTrip Time: " + timeWeight + " hours";
+        ret = super.toString() + "\nTrip Time: " + timeWeight + " hours";
         return ret;
     }
     
     public Destination clone(){
         
+        /*
         try{
             Destination copy = (Destination)super.clone();
             copy.location = (City)location.clone();
@@ -98,7 +90,12 @@ public class Destination implements Cloneable{
         }
         catch(CloneNotSupportedException e){
             return null;
-        }
+        }*/
+        
+        Destination copy = (Destination)super.clone();
+        copy.timeWeight = this.timeWeight;
+        return copy;
+ 
     }
     
     public boolean equals(Object other){
@@ -109,8 +106,11 @@ public class Destination implements Cloneable{
             return false;
         else{
             Destination otherDest = (Destination)other;
-            return (location.equals(otherDest.location) &&
-                    timeWeight == otherDest.timeWeight);
+            
+            return (super.getCityName().equals(otherDest.getCityName()) &&
+                    super.getCountryName().equals(otherDest.getCountryName()) &&
+                    super.getVertex() == otherDest.getVertex() &&
+                    this.getTime() == otherDest.getTime());
         }
     }
     
